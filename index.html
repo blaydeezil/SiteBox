@@ -14,8 +14,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
+      padding: 20px;
     }
     header {
       text-align: center;
@@ -35,8 +35,8 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
-      width: 90%;
-      max-width: 500px;
+      width: 100%;
+      max-width: 600px;
     }
     .file-item {
       background: #2c2c3e;
@@ -52,8 +52,9 @@
     }
     .file-name {
       font-size: 1.1em;
+      word-break: break-word;
     }
-    .download-btn {
+    .download-btn, .open-btn {
       background: #00d4ff;
       border: none;
       padding: 10px 15px;
@@ -63,42 +64,51 @@
       cursor: pointer;
       transition: background 0.2s;
       text-decoration: none;
+      margin-left: 10px;
     }
-    .download-btn:hover {
+    .download-btn:hover, .open-btn:hover {
       background: #00a6bf;
+    }
+    .buttons {
+      display: flex;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Download Center</h1>
-    <p>Select a file to download</p>
+    <h1>SiteBox</h1>
+    <p>Download or open HTML files in your browser</p>
   </header>
 
   <div class="file-list" id="fileList">
-    <!-- Files will be populated here -->
+    <!-- Files will appear here -->
   </div>
 
   <script>
-    // List of files with name and link
-    const files = [
-      { name: "Example File 1", url: "files/example1.zip" },
-      { name: "Example File 2", url: "files/example2.pdf" },
-      { name: "Example File 3", url: "files/example3.txt" }
-    ];
-
-    const fileList = document.getElementById('fileList');
-
-    files.forEach(file => {
-      const item = document.createElement('div');
-      item.classList.add('file-item');
-      item.innerHTML = `
-        <span class="file-name">${file.name}</span>
-        <a href="${file.url}" class="download-btn" download>Download</a>
-      `;
-      fileList.appendChild(item);
-    });
+    // Fetch the files list from files.json
+    fetch('files.json')
+      .then(response => response.json())
+      .then(files => {
+        const fileList = document.getElementById('fileList');
+        files.forEach(file => {
+          const item = document.createElement('div');
+          item.classList.add('file-item');
+          item.innerHTML = `
+            <span class="file-name">${file.name}</span>
+            <div class="buttons">
+              <a href="${file.url}" class="download-btn" download>Download</a>
+              <a href="${file.url}" class="open-btn" target="_blank">Open</a>
+            </div>
+          `;
+          fileList.appendChild(item);
+        });
+      })
+      .catch(err => {
+        console.error('Failed to load files.json', err);
+        const fileList = document.getElementById('fileList');
+        fileList.innerHTML = '<p style="text-align:center;color:#ff4d4d;">Failed to load file list.</p>';
+      });
   </script>
 
 </body>
