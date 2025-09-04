@@ -1,4 +1,5 @@
 [
-  { "name": "Example Site 1", "url": "site1.html" },
-  { "name": "Example Site 2", "url": "site2.html" }
+  { "name": "BC-PC_Monitor1", "url": "BC-PC_Monitor1.html" },
+  { "name": "Casa OS", "url": "Casa OS.html" }
+  { "name": "iFrame Loader", "url": "iFrame Loader.html" }
 ]
