@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Downloader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #1e1e2f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header h1 {
+      font-weight: 600;
+      font-size: 2.5em;
+      margin: 0;
+      color: #00d4ff;
+    }
+    header p {
+      font-weight: 400;
+      color: #aaa;
+    }
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      width: 90%;
+      max-width: 500px;
+    }
+    .file-item {
+      background: #2c2c3e;
+      padding: 15px 20px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s;
+    }
+    .file-item:hover {
+      transform: scale(1.02);
+    }
+    .file-name {
+      font-size: 1.1em;
+    }
+    .download-btn {
+      background: #00d4ff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: #1e1e2f;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .download-btn:hover {
+      background: #00a6bf;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Download Center</h1>
+    <p>Select a file to download</p>
+  </header>
+
+  <div class="file-list" id="fileList">
+    <!-- Files will be populated here -->
+  </div>
+
+  <script>
+    // List of files with name and link
+    const files = [
+      { name: "Example File 1", url: "files/example1.zip" },
+      { name: "Example File 2", url: "files/example2.pdf" },
+      { name: "Example File 3", url: "files/example3.txt" }
+    ];
+
+    const fileList = document.getElementById('fileList');
+
+    files.forEach(file => {
+      const item = document.createElement('div');
+      item.classList.add('file-item');
+      item.innerHTML = `
+        <span class="file-name">${file.name}</span>
+        <a href="${file.url}" class="download-btn" download>Download</a>
+      `;
+      fileList.appendChild(item);
+    });
+  </script>
+
+</body>
+</html>
