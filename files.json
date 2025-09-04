@@ -1,5 +1,5 @@
 [
-  { "name": "BC-PC_Monitor1", "url": "BC-PC_Monitor1.html" },
-  { "name": "Casa OS", "url": "Casa OS.html" },
-  { "name": "iFrame Loader", "url": "iFrame Loader.html" }
+  { "name": "BC-PC_Monitor1", "url": "/files/BC-PC_Monitor1.html" },
+  { "name": "Casa OS", "url": "/files/Casa OS.html" },
+  { "name": "iFrame Loader", "url": "/files/iFrame Loader.html" }
 ]
