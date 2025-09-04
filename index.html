@@ -86,7 +86,7 @@
   </div>
 
   <script>
-    // Fetch the files list from the root directory
+    // Fetch the files list from files.json
     fetch('files.json')
       .then(response => response.json())
       .then(files => {
@@ -94,13 +94,12 @@
         files.forEach(file => {
           const item = document.createElement('div');
           item.classList.add('file-item');
-          // Prepend "files/" to all URLs so they point to the files folder
-          const filePath = 'files/' + file.url;
+          // Use file.url as-is, it should include 'files/' in JSON
           item.innerHTML = `
             <span class="file-name">${file.name}</span>
             <div class="buttons">
-              <a href="${filePath}" class="download-btn" download>Download</a>
-              <a href="${filePath}" class="open-btn" target="_blank">Open</a>
+              <a href="${file.url}" class="download-btn" download>Download</a>
+              <a href="${file.url}" class="open-btn" target="_blank">Open</a>
             </div>
           `;
           fileList.appendChild(item);
