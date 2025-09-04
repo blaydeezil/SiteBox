@@ -86,19 +86,21 @@
   </div>
 
   <script>
-    // Fetch the files list from the files folder
-    fetch('files/files.json')
+    // Fetch the files list from the root directory
+    fetch('files.json')
       .then(response => response.json())
       .then(files => {
         const fileList = document.getElementById('fileList');
         files.forEach(file => {
           const item = document.createElement('div');
           item.classList.add('file-item');
+          // Prepend "files/" to all URLs so they point to the files folder
+          const filePath = 'files/' + file.url;
           item.innerHTML = `
             <span class="file-name">${file.name}</span>
             <div class="buttons">
-              <a href="files/${file.url}" class="download-btn" download>Download</a>
-              <a href="files/${file.url}" class="open-btn" target="_blank">Open</a>
+              <a href="${filePath}" class="download-btn" download>Download</a>
+              <a href="${filePath}" class="open-btn" target="_blank">Open</a>
             </div>
           `;
           fileList.appendChild(item);
