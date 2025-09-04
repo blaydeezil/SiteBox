@@ -86,31 +86,31 @@
   </div>
 
   <script>
-    // Fetch the files list from files.json
-    fetch('files.json')
-      .then(response => response.json())
-      .then(files => {
-        const fileList = document.getElementById('fileList');
-        files.forEach(file => {
-          const item = document.createElement('div');
-          item.classList.add('file-item');
-          // Use file.url as-is, it should include 'files/' in JSON
-          item.innerHTML = `
-            <span class="file-name">${file.name}</span>
-            <div class="buttons">
-              <a href="${file.url}" class="download-btn" download>Download</a>
-              <a href="${file.url}" class="open-btn" target="_blank">Open</a>
-            </div>
-          `;
-          fileList.appendChild(item);
-        });
-      })
-      .catch(err => {
-        console.error('Failed to load files.json', err);
-        const fileList = document.getElementById('fileList');
-        fileList.innerHTML = '<p style="text-align:center;color:#ff4d4d;">Failed to load file list.</p>';
-      });
-  </script>
+  const baseURL = "https://blaydeezil.github.io/SiteBox/"; // Base URL of your site
 
+  fetch('files.json')
+    .then(response => response.json())
+    .then(files => {
+      const fileList = document.getElementById('fileList');
+      files.forEach(file => {
+        const fileURL = baseURL + file.url; // Combine base URL with file path
+        const item = document.createElement('div');
+        item.classList.add('file-item');
+        item.innerHTML = `
+          <span class="file-name">${file.name}</span>
+          <div class="buttons">
+            <a href="${fileURL}" class="download-btn" download>Download</a>
+            <a href="${fileURL}" class="open-btn" target="_blank">Open</a>
+          </div>
+        `;
+        fileList.appendChild(item);
+      });
+    })
+    .catch(err => {
+      console.error('Failed to load files.json', err);
+      const fileList = document.getElementById('fileList');
+      fileList.innerHTML = '<p style="text-align:center;color:#ff4d4d;">Failed to load file list.</p>';
+    });
+</script>
 </body>
 </html>
